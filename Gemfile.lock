@@ -1,0 +1,22 @@
+GIT
+  remote: https://github.com/LVALL/html_maker
+  revision: eaf67b848ae5f215ecc9faee5227545e53674dfb
+  specs:
+    html_maker (0.1.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  html_maker (>= 0.1.1)!
+  nokogiri
+
+BUNDLED WITH
+   2.1.4
