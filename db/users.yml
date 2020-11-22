@@ -1,0 +1,10 @@
+---
+- :login: admin
+  :password: admin
+  :role: Admin
+- :login: superadmin
+  :password: superadmin
+  :role: SuperAdmin
+- :login: user
+  :password: user
+  :role: User

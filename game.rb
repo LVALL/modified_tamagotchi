@@ -1,3 +1,4 @@
+require_relative 'controllers/session'
 require_relative 'pet'
 require 'html_maker'
 
@@ -11,7 +12,17 @@ class Game
     html
   end
 
+  def login_user
+    puts 'Please, enter your login:'
+    login = gets.chomp
+    puts 'Please, enter your password:'
+    password = gets.chomp
+    @user = Session.new(login, password).create_session
+    puts "Hello #{@user[:role]}"
+  end
+
   def start_game
+    login_user
     create_pet
     help
     MakeHtml.new.open_in_browser
