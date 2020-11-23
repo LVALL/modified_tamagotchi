@@ -1,10 +1,37 @@
 ---
-- :login: admin
+- &1
+  :login: admin
   :password: admin
   :role: Admin
-- :login: superadmin
+  :pet_data:
+  - :name: ssasasas
+    :health: '100'
+    :happiness: '100'
+    :fullness: '100'
+    :activity: '100'
+- &2
+  :login: superadmin
   :password: superadmin
   :role: SuperAdmin
+  :pet_data:
+  - :name: superpet
+    :health: '100'
+    :happiness: '100'
+    :fullness: '100'
+    :activity: '100'
 - :login: user
   :password: user
   :role: User
+  :pet_data: []
+- *1
+- *1
+- *1
+- *1
+- :login: valera
+  :password: valera
+  :role: User
+  :pet_data: []
+- *1
+- *1
+- *1
+- - *2

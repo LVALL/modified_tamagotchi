@@ -17,8 +17,9 @@ class Game
     login = gets.chomp
     puts 'Please, enter your password:'
     password = gets.chomp
-    @user = Session.new(login, password).create_session
-    puts "Hello #{@user[:role]}"
+    @user = Session.new(login, password)
+    user_data = @user.create_session
+    puts "Hello #{user_data[:role]}"
   end
 
   def start_game
@@ -30,7 +31,6 @@ class Game
     while @pet.health != 0
       print "\nChoose command (to show info press `5`, than `Enter`): "
       decision = gets.chomp
-      break if decision == '6'
 
       case decision
       when '1'
@@ -47,6 +47,10 @@ class Game
         html
       when '5'
         help
+      when '6'
+        pet_data = pet_info
+        @user.save_pet_data(pet_data)
+        break
       when ''
         @pet.watch
         html
@@ -67,6 +71,15 @@ class Game
   end
 
   private
+
+  def pet_info
+    data = [{ name: @pet.name.to_s,
+              health: @pet.health.to_s,
+              happiness: @pet.happiness.to_s,
+              fullness: @pet.fullness.to_s,
+              activity: @pet.activity.to_s }]
+    data
+  end
 
   def html(filename = 'index.html')
     content = "

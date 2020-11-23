@@ -1,4 +1,5 @@
 require 'yaml'
+require_relative '../pet'
 
 class User
   attr_accessor :login, :password, :role, :data
@@ -11,13 +12,13 @@ class User
   end
 
   def create
-    { login: @login, password: @password, role: @role }
+    { login: @login, password: @password, role: @role, pet_data: @data }
   end
 
   def log_in
     users = db_load
     user = create
-    save(users, user) unless present?
+    save(users, user) unless present?(@login)
     user
   end
 
@@ -30,13 +31,11 @@ class User
     YAML.load(File.open('db/users.yml', 'r'))
   end
 
-  def present?
-    db_load.any? { |u| u[:login] == @login }
+  def present?(login)
+    db_load.any? { |u| u[:login] == login }
   end
 
-  def valid_password?
-    db_load.any? { |u| u[:login] == @login && user[:password] == @password }
+  def valid_password?(login, password)
+    db_load.any? { |u| u[:login] == login && user[:password] == password }
   end
 end
-# u = User.new('valera', 'valera')
-# puts u.log_in
