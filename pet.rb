@@ -13,7 +13,7 @@ class Pet
 
   def play
     @reaction = 'Funny!) that`s so funny'
-    @happiness.between?(0, 90) ? @happiness += rand(5..10) : @happiness = 100
+    @happiness = change(@happiness, true)
     @smile = '🐾🏀'
     decrease_stat
     time_passed
@@ -21,7 +21,7 @@ class Pet
 
   def feed
     @reaction = 'OmNomNom, so tasty'
-    @fullness.between?(0, 90) ? @fullness += rand(5..10) : @fullness = 100
+    @fullness = change(@fullness, true)
     @smile = '🍲'
     increase_stat
     time_passed
@@ -29,7 +29,7 @@ class Pet
 
   def sleep
     @reaction = "SnoooZe 💤💤💤💤💤... #{@name} wakes up and yawned"
-    @fullness > 10 ? @fullness -= rand(5..10) : @fullness = 0
+    @fullness = change(@fullness, false)
     increase_stat
     time_passed
     @smile = '🙈💤'
@@ -46,6 +46,14 @@ class Pet
   def watch
     time_passed
     @smile = '🕜'
+  end
+
+  def reset_data
+    @health = 100
+    @happiness = 100
+    @fullness = 100
+    @activity = 100
+    @smile = '🐒'
   end
 
   private
@@ -79,15 +87,23 @@ class Pet
   end
 
   def decrease_stat
-    @fullness > 20 ? @fullness -= rand(10..20) : @fullness = 0
-    @activity > 20 ? @activity -= rand(10..20) : @activity = 0
-    @health > 20 ? @health -= rand(10..20) : @health = 0
+    @fullness = change(@fullness, false)
+    @activity = change(@activity, false)
+    @health = change(@health, false)
   end
 
   def increase_stat
-    @activity.between?(0, 90) ? @activity += rand(5..10) : @activity = 100
-    @happiness.between?(0, 90) ? @happiness += rand(5..10) : @happiness = 100
-    @health.between?(0, 90) ? @health += rand(5..10) : @health = 100
+    @activity = change(@activity, true)
+    @happiness = change(@happiness, true)
+    @health = change(@health, true)
+  end
+
+  def change(param, increase)
+    if increase
+      param.between?(0, 90) ? param + rand(5..10) : 100
+    else
+      param > 10 ? param - rand(5..10) : 0
+    end
   end
 
   def time_passed

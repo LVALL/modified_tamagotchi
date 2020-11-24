@@ -4,7 +4,7 @@
   :password: admin
   :role: Admin
   :pet_data:
-  - :name: ssasasas
+  - :name: beka
     :health: '100'
     :happiness: '100'
     :fullness: '100'
@@ -14,24 +14,21 @@
   :password: superadmin
   :role: SuperAdmin
   :pet_data:
-  - :name: superpet
+  - :name: peppa
     :health: '100'
     :happiness: '100'
     :fullness: '100'
     :activity: '100'
-- :login: user
+- &3
+  :login: user
   :password: user
   :role: User
-  :pet_data: []
+  :pet_data:
+  - :name: retty
+    :health: '81'
+    :happiness: '100'
+    :fullness: '81'
+    :activity: '81'
 - *1
-- *1
-- *1
-- *1
-- :login: valera
-  :password: valera
-  :role: User
-  :pet_data: []
-- *1
-- *1
-- *1
-- - *2
+- *2
+- *3

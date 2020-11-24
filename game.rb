@@ -20,6 +20,8 @@ class Game
     @user = Session.new(login, password)
     user_data = @user.create_session
     puts "Hello #{user_data[:role]}"
+    super_admin_control if user_data[:role] == 'SuperAdmin'
+    admin_control if user_data[:role] == 'Admin'
   end
 
   def start_game
@@ -51,6 +53,22 @@ class Game
         pet_data = pet_info
         @user.save_pet_data(pet_data)
         break
+      when 'change'
+        @pet.name = gets.chomp
+      when 'kill'
+        @pet.health = 0
+      when 'change_name'
+        @pet.name = gets.chomp
+      when 'change_health'
+        @pet.health = gets.chomp
+      when 'change_happiness'
+        @pet.happiness = gets.chomp
+      when 'change_fullness'
+        @pet.fullness = gets.chomp
+      when 'change_activity'
+        @pet.activity = gets.chomp
+      when 'reset'
+        @pet.reset_data
       when ''
         @pet.watch
         html
@@ -79,6 +97,30 @@ class Game
               fullness: @pet.fullness.to_s,
               activity: @pet.activity.to_s }]
     data
+  end
+
+  def admin_control
+    puts "\nAdmin panel:
+      To change pet name enter `change`
+      Than enter new name"
+  end
+
+  def super_admin_control
+    puts "\nSuperAdmin panel:
+      To change pet name enter `change_name`
+      Than enter new name\n
+      To change pet health enter `change_health`
+      Than enter new health\n
+      To change pet happiness enter `change_happiness`
+      Than enter new happiness\n
+      To change pet fullness enter `change_fullness`
+      Than enter new fullness\n
+      To change pet activity enter `change_activity`
+      Than enter new activity\n
+      To reset pet stat enter `reset`\n
+      To kill pet enter `kill`
+      Than enter new activity\n
+      "
   end
 
   def html(filename = 'index.html')
