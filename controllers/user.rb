@@ -27,20 +27,6 @@ class User
     File.open('db/users.yml', 'w+') { |file| file.write(users.to_yaml) }
   end
 
-  # def save_pet_data(pet_data)
-  #   data = YAML.load_file 'db/users.yml'
-  #   find = data.detect { |hash| hash[:login] == @login }
-  #   find[:pet_data] = pet_data
-  #
-  #   data << find
-  #   # data.delete(find)
-  #   puts '000000000000000000000000000000000000000000000000000'
-  #   # puts data
-  #   puts data
-  #   # File.open('db/users.yml', 'w') { |f| YAML.dump(data, f) }
-  #   File.open('db/users.yml', 'w') { |file| file.write(data.to_yaml) }
-  # end
-
   def db_load
     YAML.load(File.open('db/users.yml', 'r'))
   end
@@ -53,6 +39,3 @@ class User
     db_load.any? { |u| u[:login] == login && user[:password] == password }
   end
 end
-
-# u = User.new('user', 'user')
-# u.save_pet_data('dsds')

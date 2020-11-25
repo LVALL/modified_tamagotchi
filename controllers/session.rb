@@ -21,9 +21,9 @@ class Session
 
   def save_pet_data(pet_data)
     data = YAML.load_file 'db/users.yml'
-    find = data.detect { |hash| hash[:login] == @login }
-    find[:pet_data] = pet_data
-    data << find
+    user = data.detect { |hash| hash[:login] == @login }
+    user[:pet_data] = pet_data
+    data << user
     File.open('db/users.yml', 'w') { |file| file.write(data.to_yaml) }
   end
 
